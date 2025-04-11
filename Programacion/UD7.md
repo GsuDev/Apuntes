@@ -103,10 +103,16 @@ File("origen.txt").copyTo(File("destino.txt"), overwrite = true)
 
 ## 🔄 Acceso Aleatorio (Kotlin + `RandomAccessFile`)
 
+**1. Métodos**
+
+- `file.seek(pos)`: Coloca en la posicion pasada por parametro el cursor.
+- `file.read(buffer)`: Lee 
+
 ```kotlin
 import java.io.RandomAccessFile
 
-RandomAccessFile("datos.bin", "rw").use { file ->
+RandomAccessFile("datos.bin", "rw").use { 
+  file ->
     file.seek(10)  // Posiciona el puntero
     file.writeUTF("Kotlin")  // Escribe String
     file.seek(0)
@@ -114,46 +120,6 @@ RandomAccessFile("datos.bin", "rw").use { file ->
 }
 ```
 
----
-
-## 🧩 Serialización (Kotlin Serialization Library)
-
-**1. Añade la dependencia** (`build.gradle.kts`):
-
-```kotlin
-plugins {
-    kotlin("plugin.serialization") version "1.9.0"
-}
-
-dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-}
-```
-
-**2. Código:**
-
-```kotlin
-import kotlinx.serialization.*
-import kotlinx.serialization.json.*
-import java.io.File
-
-@Serializable
-data class Persona(val nombre: String, val edad: Int)
-
-fun main() {
-    val persona = Persona("Ana", 25)
-
-    // Serializar a JSON
-    val json = Json.encodeToString(persona)
-    File("persona.json").writeText(json)
-
-    // Deserializar
-    val leido = Json.decodeFromString<Persona>(File("persona.json").readText())
-    println(leido)  // Persona(nombre=Ana, edad=25)
-}
-```
-
----
 ## 🗂️Archivos binarios
 
 **1. Leer archivos binarios:**
