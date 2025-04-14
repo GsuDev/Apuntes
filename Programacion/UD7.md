@@ -12,7 +12,6 @@
 
 ---
 
-
 # 📝 Apuntes **Kotlin** sobre Manejo de Ficheros (100% Kotlin)
 
 ## 📂 Crear/Verificar Archivos
@@ -21,16 +20,16 @@
 import java.io.File
 
 fun crearArchivo(ruta: String) {
-    val archivo = File(ruta)
+    val file = File(ruta)
 
-    if (!archivo.exists()) {
+    if (!file.exists()) {
 
       // Si no existe lo crea
-      createNewFile()
-      println("✅ Archivo creado: $absolutePath")
+      file.createNewFile()
+      println("✅ Archivo creado: ${file.absolutePath}")
     } else {
       // Si existe lo avisa
-      println("⚠️ Ya existe: $name")
+      println("⚠️ Ya existe: ${file.name}")
     }
 
 }
@@ -106,12 +105,12 @@ File("origen.txt").copyTo(File("destino.txt"), overwrite = true)
 **1. Métodos**
 
 - `file.seek(pos)`: Coloca en la posicion pasada por parametro el cursor.
-- `file.read(buffer)`: Lee 
+- `file.read(buffer)`: Lee
 
 ```kotlin
 import java.io.RandomAccessFile
 
-RandomAccessFile("datos.bin", "rw").use { 
+RandomAccessFile("datos.bin", "rw").use {
   file ->
     file.seek(10)  // Posiciona el puntero
     file.writeUTF("Kotlin")  // Escribe String
@@ -123,13 +122,14 @@ RandomAccessFile("datos.bin", "rw").use {
 ## 🗂️Archivos binarios
 
 **1. Leer archivos binarios:**
+
 ```kotlin
 
 //Guarda toda la información de un binario (ej.: .png, .pdf, .avi) en un array
 fun leeFicheroBinario(nombreArchivo: String):ByteArray? {
   var fis: FileInputStream? = null
   var listaDeBytes:ByteArray? = null
-  // 
+  //
 
     val file = File(nombreArchivo)
     if (file.exists()) {
@@ -151,13 +151,45 @@ fun leeFicheroBinario(nombreArchivo: String):ByteArray? {
 **2. Escribir archivos binarios:**
 ![](img/p1.png)
 
-
 ![](img/p3.png)
 
 ---
+
+## 📁 Directorios
+
+### Listar contenido
+
+```kotlin
+fun ls(file: File){
+  if (file.isDirectory) {
+    // Guarda el nombre de los archivos y carpetas contenidos
+    val content: Array<String!>! = file.list()
+
+    // Crea dos arrays donde guardaremos los nombres 
+    // de los archivos y de los directorios
+    val files = ArrayList<String>()
+    val directories = ArrayList<String>()
+
+    // Recorre el array
+    content?.forEach { childName ->
+      // Imprime el nombre del hijo
+      println(childName)
+      // Instancia el fichero
+      val child = File(childName)
+      // Según sea archivo o directorio lo añade a la lista correspondiente
+      if (child.isFile) files.add(childName)
+      if (child.isDirectory) files.add(childName)
+    }
+    // Imprime la cuenta de cada uno
+    println("El directorio ${file.name} contiene:\n" +
+     "${files.size} archivos\n" +
+     "${directories.size} directorios"
+    )
+  }
+}
+```
 
 ### 🔗 Recursos
 
 - **Clase File** [(Java Docs)](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/File.html)  
   -- **Referencia oficial**: [Kotlin File Handling](https://kotlinlang.org/docs/io.html)
-
