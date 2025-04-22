@@ -12,9 +12,11 @@
 
 ---
 
-# 📝 Apuntes **Kotlin** sobre Manejo de Ficheros (100% Kotlin)
+# 📝 Apuntes **Kotlin** sobre Manejo de Ficheros
 
 ## 📂 Crear/Verificar Archivos
+
+### Crear archivo vacío
 
 ```kotlin
 import java.io.File
@@ -36,6 +38,43 @@ fun crearArchivo(ruta: String) {
 
 // Uso:
 crearArchivo("datos.txt")
+```
+
+### Crear archivo con contenido (con FileWriter)
+
+```Kotlin
+fun createFileOf(pathName: String, content: String): File {
+  // Convertimos a Path
+  val path = Path(pathName)
+  // Obtenemos el directorio padre si no es un directorio
+  val parentPath = if (!path.isDirectory()) path.parent else path
+
+  // Instanciamos el archivo
+  val file = File(parentPath.toString(), "fichero.txt")
+
+  try {
+    // Crea el archivo si no existe
+    if (!file.exists()) {
+      file.createNewFile()
+      println("✅ El archivo ${file.name} ha sido creado")
+    } else {
+      println("⚠️ El archivo ${file.name} ya existía, se sobrescribirá su contenido")
+    }
+
+    // Escribimos el contenido
+    val fileWriter = FileWriter(file)
+    fileWriter.use {
+      it.write(content)
+    }
+    println("✅ Se ha escrito en el archivo ${file.name}")
+
+  } catch (e: Exception) {
+    println("❌ Error al crear/escribir el archivo: ${e.message}")
+    throw e
+  }
+
+  return file
+}
 ```
 
 ---
@@ -73,14 +112,41 @@ File("datos.txt").bufferedWriter().use { writer ->
 val texto = File("datos.txt").readText()
 println(texto)
 ```
+### 2. Imprimir un archivo
 
-### 2. `readLines` (lista de líneas)
+```kotlin
+fun printFile(pathName: String) {
+  // Instanciamos el archivo
+  val file = File(pathName)
+
+  // Realizamos las comprobaciones previas
+  if (file.isDirectory){
+    println("❌ La ruta proporcionada no corresponde a un archivo")
+    return
+  } else if (!file.exists()) {
+    println("❌ El archivo no existe")
+    return
+  }
+  
+  // Leemos el archivo manejando las excepciones
+  try {
+    FileReader(file).use {
+      println(it.readText())
+      // println((it.readLines())[0]) // Imprime solo la primera línea
+    }
+  } catch (e:IOException){
+    println("❌ Se ha producido un error al leer el archivo")
+  }
+}
+```
+
+### 3. `readLines` (lista de líneas)
 
 ```kotlin
 File("datos.txt").readLines().forEach { println("> $it") }
 ```
 
-### 3. `forEachLine` (línea por línea)
+### 4. `forEachLine` (línea por línea)
 
 ```kotlin
 File("datos.txt").forEachLine { println("Línea: $it") }
@@ -124,26 +190,40 @@ RandomAccessFile("datos.bin", "rw").use {
 **1. Leer archivos binarios:**
 
 ```kotlin
+// Función que lee un archivo binario y devuelve su contenido como un array de bytes
+fun leeFicheroBinario(nombreArchivo: String): ByteArray? {
+  var fis: FileInputStream? = null // Declaramos la variable para el flujo de entrada
+  var listaDeBytes: ByteArray? = null // Aquí guardaremos los datos del archivo
 
-//Guarda toda la información de un binario (ej.: .png, .pdf, .avi) en un array
-fun leeFicheroBinario(nombreArchivo: String):ByteArray? {
-  var fis: FileInputStream? = null
-  var listaDeBytes:ByteArray? = null
-  //
+  try {
+    val file = File(nombreArchivo) // Creamos un objeto File con el nombre recibido
 
-    val file = File(nombreArchivo)
-    if (file.exists()) {
-      fis = FileInputStream(file)
-      ListaDeBytes = fis.readBytes()
-      println(ListaDeBytes.size)
-      println(listaDeBytes.joinToString ( separator:" "))
+    if (file.exists()) { // Verificamos si el archivo realmente existe
+      fis = FileInputStream(file) // Abrimos el archivo con un flujo de entrada binario
+      listaDeBytes = fis.readBytes() // Leemos todos los bytes del archivo y los guardamos en el array
+
+      // Mostramos por consola el tamaño del archivo en bytes
+      println("Tamaño del archivo: ${listaDeBytes.size} bytes")
+
+      // Mostramos el contenido del array de bytes (puede ser largo, ojo con archivos grandes)
+      println(listaDeBytes.joinToString(separator = " "))
     } else {
+      // Si el archivo no existe, mostramos un mensaje de error
       println("El fichero $nombreArchivo no existe")
     }
+  } catch (e: IOException) {
+    // Si ocurre un error al leer el archivo, lo mostramos
+    println("Error al leer el archivo: ${e.message}")
   } finally {
-    fis?.closer()
+    try {
+      // Intentamos cerrar el flujo de entrada si se abrió correctamente
+      fis?.close()
+    } catch (e: IOException) {
+      // Si hay un error al cerrar, también lo mostramos
+      println("Error al cerrar el archivo: ${e.message}")
+    }
   }
-
+  // Devolvemos el contenido leído (o null si no se leyó nada)
   return listaDeBytes
 }
 ```
