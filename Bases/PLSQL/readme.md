@@ -12,6 +12,8 @@
 5. [Funciones](#-5-funciones)
 6. [Control de flujo](#-6-instrucciones-de-control-de-flujo)
 7. [Excepciones](#️-7-plsql-excepción)
+8. [Cursores](#️-8-cursores)
+
 
 ---
 
@@ -219,7 +221,33 @@ END;
 /
 ```
 
+
+
+## ↪️ 8. Cursores
+
+
+
+
+## 📦 9. Colecciones
+
+
+
+## 🤝 10. Transacciones
+
+Instrucciones básicas:
+
+- BEGIN
+- COMMIT
+- EXCEPTION
+- ROLLBACK
+- SAVEPOINT
+
+
 ---
+
+
+
+
 
 ## 📌 Resumen final
 PL/SQL es un lenguaje poderoso para:

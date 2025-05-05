@@ -175,5 +175,72 @@ Para asignar IPs manualmente:
 `$ ip a del [IP/Máscara] dev [interfaz]`
 - Desasignar la ip a la puerta de enlace:
 `$ ip route del [red/máscara] via [IP-del-gateway] dev [interfaz]`
-- Asignar DNS:
-`$ `
+- Asignar DNS temporal:
+`$ nano /etc/resolv.conf`
+
+# UD8: Usuarios y grupos en Windows (Cae en el examen comparar esto entre windows y linux)
+
+## Administrador de Equipos
+
+Con esta herramienta puedo administrar los usuarios y grupos en windows.
+
+En windows se pueden añadir tantos usuarios y grupos como se quiera pero existen mas opciones a la hora de asignar permisos.
+
+Existe la opción permitir y la opción denegar la cual prevalece por lo que si a un archivo tiene acceso total un grupo pero a un usuario del grupo se le deniegan permisos, no tendrá acceso aunque pertenezca a un grupo con acceso.
+
+Comparativa de permisos Linux vs. Windows (resumen):
+
+**Comparativa de permisos Linux vs. Windows (resumen):**  
+
+- **Linux**:  
+  - **3 permisos básicos**: Lectura (`r`), Escritura (`w`), Ejecución (`x`).  
+  - **3 roles**: Dueño, Grupo y Otros.  
+  - **Representación**: Notación simbólica (ej. `rwxr-xr--`) o octal (ej. `755`).  
+  - **Comandos**: `chmod`, `chown`, `chgrp`.  
+  - **Permisos especiales**: SUID, SGID, Sticky Bit.  
+
+- **Windows**:  
+  - **ACL (Listas de Control de Acceso)**: Permisos granulares (Leer, Modificar, Control total, etc.).  
+  - **Asignación**: A usuarios/grupos específicos.  
+  - **Herencia**: Los subdirectorios/archivos pueden heredar permisos.  
+  - **Gestión**: Interfaz gráfica (Propiedades > Seguridad) o comandos (`icacls`).  
+
+**Diferencia clave**:  
+- Linux usa permisos simples y fijos (salvo ACLs avanzadas).  
+- Windows usa ACLs flexibles con herencia y gestión visual.  
+
+(✔️ Perfecto para media cara de folio).
+
+# Examen
+
+- Usuarios y grupos (1 punto)
+  - Carpeta /etc:
+    - passwd: Cuentas
+      ```
+      Comandos interesantes para cuentas:
+
+      - passwd pepe: Cambiar contraseña
+      - passwd -l pepe: Bloquear la cuenta
+      - passwd -u pepe: Desbloquear la cuenta
+      - chown: Cambiar usuario propietario
+      ```
+    - shadow: Contraseñas *cifradas*
+    - groups - Grupos (Interesante -> grupo sudo )
+
+- Repositorios y gestores de paquetes ()
+  - Repositorios:
+    - Lugar donde se guardan paquetes de instalación
+    - Puede ser local u online
+  - Gestores de paquetes:
+    - apt
+  - Codigo fuente:
+    - leer el INSTALL
+    - ejecutar el ./configure para ver si está todo ok antes de instalar
+    - make para compilar
+    - sudo make install para instalar para todo el equipo
+
+- Monitorización:
+  - Software necesario
+  ![alt text](image-10.png)
+  - Hardware:
+    - lsusb, lspci, lshw

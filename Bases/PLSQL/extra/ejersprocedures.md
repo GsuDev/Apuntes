@@ -127,6 +127,71 @@ WHERE object_name LIKE 'PA\_%' ESCAPE '\';
 
 ---
 
+### ❎ **Ejercicio 4: Procedimiento que imprima por consola las 5 primeras tablas de multiplicar**
+
+```sql
+-- Activa la salida por consola para poder usar DBMS_OUTPUT.PUT_LINE() equivalente a println()
+SET SERVEROUTPUT ON;
+
+-- Creo el procedimiento usando el or replace para poder recompilar
+CREATE OR REPLACE PROCEDURE PROCEDIMIENTO_TABLAS
+AS
+ MULTI1 NUMBER(2); -- Primer factor
+ MULTI2 NUMBER(2); -- Segundo factor
+BEGIN
+    MULTI1:= 1; -- Inicializo el primer factor fuera
+
+    -- Itera hasta que el primer factor sea 5
+    WHILE (MULTI1 <= 5) LOOP
+        MULTI2:= 0; -- Inicializo el segundo factor dentro del primer bucle
+
+        -- Itera hasta que el segundo factor sea 10
+        WHILE (MULTI2 <= 10) LOOP
+            -- Imprime el producto de multiplicar ambos factores
+            DBMS_OUTPUT.PUT_LINE(MULTI1 '*' MULTI2 '=' MULTI1*MULTI2);
+            MULTI2:= MULTI2 + 1; -- Incrementa el segundo factor
+        END LOOP;
+        MULTI1:= MULTI1 + 1; -- Incrementa el primer factor
+    END LOOP;
+END;
+
+
+EXEC PROCEDIMIENTO_TABLAS;
+```
+
+### ❎ **Ejercicio 4.5: Procedimiento que imprima por consola la tabla de multiplicar por parametro**
+
+```sql
+-- Realiza un procedimiento que dado un parámetro de entrada del 1…10 pinte la tabla correspondiente.
+CREATE OR REPLACE PROCEDURE PROCEDIMIENTO_TABLA_ELEGIDA(I NUMBER)
+AS
+ J NUMBER(2);
+BEGIN 
+    J:= 0;
+    WHILE (J <= 10) LOOP
+        DBMS_OUTPUT.PUT_LINE(I ||'*'|| J ||'='|| I*J);
+        J:= J + 1;
+    END LOOP;
+END;
+
+EXEC PROCEDIMIENTO_TABLA_ELEGIDA(5);
+
+-- Con LOOP
+CREATE OR REPLACE PROCEDURE PROCEDIMIENTO_TABLA_ELEGIDA2(I NUMBER)
+AS
+ J NUMBER(2);
+BEGIN 
+    J:= 0;
+     LOOP
+        DBMS_OUTPUT.PUT_LINE(I ||'*'|| J ||'='|| I*J);
+        J:= J + 1;
+        EXIT WHEN (J > 10);
+    END LOOP;
+END;
+
+EXEC PROCEDIMIENTO_TABLA_ELEGIDA2(5);
+```
+
 ## 🧩 **Ejercicio Adicional Propuesto: Procedimiento para Transferencia entre Cuentas**
 
 ```sql
@@ -178,6 +243,34 @@ DECLARE
 BEGIN
     transferencia_bancaria(1001, 2002, 500, v_resultado);
     DBMS_OUTPUT.PUT_LINE(v_resultado);
+END;
+/
+```
+
+## **Ejercicio cursores**
+
+```sql
+DECLARE
+  CURSOR c_empleados_comision IS
+    SELECT apellido, oficio, comision
+    FROM empleados
+    WHERE comision > 500;
+BEGIN
+  OPEN c_empleados_comision;
+  
+  DBMS_OUTPUT.PUT_LINE('Empleados con comisión superior a 500€');
+  DBMS_OUTPUT.PUT_LINE('----------------------------------------');
+  
+  LOOP
+    FETCH c_empleados_comision INTO v_apellido, v_oficio, v_comision;
+    EXIT WHEN c_empleados_comision%NOTFOUND;
+    
+    DBMS_OUTPUT.PUT_LINE('Apellido: ' || v_apellido || 
+                         ', Oficio: ' || v_oficio || 
+                         ', Comisión: ' || v_comision || '€');
+  END LOOP;
+  
+  CLOSE c_empleados_comision;
 END;
 /
 ```
