@@ -176,7 +176,7 @@ Para asignar IPs manualmente:
 - Desasignar la ip a la puerta de enlace:
 `$ ip route del [red/máscara] via [IP-del-gateway] dev [interfaz]`
 - Asignar DNS temporal:
-`$ nano /etc/resolv.conf`
+`$ nano /etc/resolv.conf+`
 
 # UD8: Usuarios y grupos en Windows (Cae en el examen comparar esto entre windows y linux)
 
