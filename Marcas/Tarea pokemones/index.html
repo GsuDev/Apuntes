@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PokéWorld - Tu portal Pokémon construido con JSON</title>
+  <link rel="stylesheet" href="./styles/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo-container">
+        <div class="logo-circle">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="PokéBall"
+            class="pokeball">
+        </div>
+        <div class="logo-text">
+          <h1>PokeOrtega</h1>
+          <span class="tagline">Tu portal Pokémon</span>
+        </div>
+      </div>
+
+      <nav class="main-nav">
+        <button class="mobile-menu-btn">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+
+        <ul class="nav-links">
+          <li><a href="#" class="nav-link active">Inicio</a></li>
+          <li><a href="./pokedex.html" class="nav-link">Pokédex</a></li>
+          <li><a href="#" class="nav-link">Combates</a></li>
+          <li><a href="#" class="nav-link">Entrenadores</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1 class="hero-title">Bienvenido a tu portal Pokémon<br><span>construido con JSON</span></h1>
+        <p class="hero-description">Explora el mundo Pokémon con nuestra interfaz interactiva alimentada por datos JSON.
+          Descubre estadísticas, tipos y evoluciones de tus Pokémon favoritos.</p>
+        <div class="hero-buttons">
+          <a href="#featured" class="btn btn-primary">Explorar Pokémon</a>
+          <a href="#about" class="btn btn-secondary">Saber más</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="floating-pokemon" id="floating-pokemon-1">
+          <img src="./pokemon/25.png" alt="Pikachu">
+        </div>
+        <div class="floating-pokemon" id="floating-pokemon-2">
+          <img src="./pokemon/4.png" alt="Charmander">
+        </div>
+        <div class="floating-pokemon" id="floating-pokemon-3">
+          <img src="./pokemon/7.png" alt="Squirtle">
+        </div>
+        <div class="pokeball-bg"></div>
+      </div>
+    </div>
+    <div class="wave-divider">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#ffffff" fill-opacity="1"
+          d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+        </path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-header">
+        <h2>¿Qué es PokeOrtega?</h2>
+        <p>Una plataforma interactiva para explorar el universo Pokémon</p>
+      </div>
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon grass">
+            <img src="./pokemon/great-ball.png" alt="Pokédex">
+          </div>
+          <h3>Pokédex Completa</h3>
+          <p>Accede a información detallada de todos los Pokémon con datos actualizados en formato JSON.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon fire">
+            <img src="./pokemon/ultra-ball.png" alt="Estadísticas">
+          </div>
+          <h3>Estadísticas Avanzadas</h3>
+          <p>Visualiza y compara estadísticas de combate, tipos y habilidades de cada Pokémon.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon water">
+            <img src="./pokemon/master-ball.png" alt="Personalización">
+          </div>
+          <h3>Personalización Total</h3>
+          <p>Crea y personaliza tu equipo ideal con nuestro sistema basado en JSON.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Pokemon Section -->
+  <section class="featured" id="featured">
+    <div class="container">
+      <div class="section-header">
+        <h2>Pokémon Destacados</h2>
+        <p>Explora algunos de los Pokémon más populares</p>
+      </div>
+      
+      <div id="show-case" class="showcase">
+        <!-- Aquí se mostrarán las tarjetas de Pokémon aleatorios -->
+      </div>
+      
+
+      <div class="center-button">
+        <a href="./pokedex.html" class="btn btn-primary">Ver todos los Pokémon</a>
+      </div>
+      <div>
+        <button class="refresh-button" id="refresh-button">Mostrar otros Pokemones</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <h2>¿Cómo funciona?</h2>
+        <p>Construido con tecnología JSON para una experiencia fluida</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Datos JSON</h3>
+          <p>Toda la información de los Pokémon se almacena en formato JSON estructurado y fácil de usar.</p>
+          <div class="code-snippet">
+            
+        <pre><code>         {
+          "Id": "25",
+          "Name": "Pikachu",
+          "Type 1": "Electric",
+          "HP": "35",
+          "Attack": "55",
+          ...
+        }</code></pre>
+            
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Renderizado Dinámico</h3>
+          <p>Nuestro codigo JavaScript convierte los datos JSON en tarjetas visuales interactivas.</p>
+          <video src="./pokemon/gif-pikachu.mp4" class="gif-pikachu" autoplay loop></video>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Paginación</h3>
+          <p>Las tarjetas se muestran en páginas y no todas de golpe por lo que se puede avanzar y retroceder sin cargar todos los datos de golpe</p>
+          <video src="./pokemon/gif-paginas.mp4" class="gif-paginas" autoplay loop></video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta">
+    <div class="container">
+      <h2>¡Comienza tu aventura Pokémon ahora!</h2>
+      <p>Únete a miles de entrenadores y explora el mundo Pokémon</p>
+      <a href="#" class="btn btn-large">¡Quiero ser un Maestro Pokémon!</a>
+    </div>
+    <div class="wave-divider-bottom">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#ffffff" fill-opacity="1"
+          d="M0,160L48,170.7C96,181,192,203,288,202.7C384,203,480,181,576,165.3C672,149,768,139,864,154.7C960,171,1056,213,1152,218.7C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+        </path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <div class="logo-container">
+            <div class="logo-circle small">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
+                alt="PokéBall" class="pokeball">
+            </div>
+            <div class="logo-text">
+              <h2>PokeOrtega</h2>
+            </div>
+          </div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h3>Explorar</h3>
+            <ul>
+              <li><a href="#">Inicio</a></li>
+              <li><a href="#">Pokédex</a></li>
+              <li><a href="#">Combates</a></li>
+              <li><a href="#">Entrenadores</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Recursos</h3>
+            <ul>
+              <li><a href="#">API JSON</a></li>
+              <li><a href="#">Documentación</a></li>
+              <li><a href="#">Guías</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Comunidad</h3>
+            <ul>
+              <li><a href="#">Foro</a></li>
+              <li><a href="#">Discord</a></li>
+              <li><a href="#">Eventos</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 PokeOrtega. Todos los derechos reservados.</p>
+        <p>Pokémon y sus nombres son marcas registradas de Nintendo.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./scripts/script.js"></script>
+</body>
+
+</html>

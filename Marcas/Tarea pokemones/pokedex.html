@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarjeta de Pokémon</title>
+  <link rel="stylesheet" href="./styles/pokedex.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+</head>
+
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo-container">
+        <div class="logo-circle"></div>
+        <div class="logo-text">
+          <h1>PokeOrtega</h1>
+          <span class="tagline">Tu portal Pokémon</span>
+        </div>
+      </div>
+
+      <nav class="main-nav">
+        <button class="mobile-menu-btn">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+
+        <ul class="nav-links">
+          <li><a href="./index.html" class="nav-link">Inicio</a></li>
+          <li><a href="#" class="nav-link active">Pokédex</a></li>
+          <li><a href="#" class="nav-link">Combates</a></li>
+          <li><a href="#" class="nav-link">Entrenadores</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <!-- Los Pokémon se cargarán aquí mediante JavaScript -->
+    </div>
+
+    <div class="pagination">
+      <button class="button" id="prevPage">
+
+
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+        </svg>
+
+
+        <div class="text">
+          Anterior
+        </div>
+
+      </button>
+      <span id="pageInfo"></span>
+      <button class="button" id="nextPage">
+
+
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+        </svg>
+
+
+        <div class="text">
+          Siguiente
+        </div>
+
+      </button>
+    </div>
+  </main>
+
+
+  <!-- Template para la tarjeta de Pokémon -->
+  <template id="pokemon-card-template">
+    <div class="pokemon-card">
+      <div class="card-header">
+        <div class="sprite-container">
+          <div class="sprite-bg"></div>
+          <div class="sprite-circle">
+            <img class="sprite" src="/placeholder.svg" alt="">
+          </div>
+        </div>
+        <div class="pokemon-id">#</div>
+        <div class="legendary-tag">★ Legendario</div>
+      </div>
+      <div class="card-content">
+        <h2 class="pokemon-name"></h2>
+        <div class="type-tags"></div>
+        <div class="stats-container">
+          <div class="stat-row">
+            <span class="stat-label">HP:</span>
+            <div class="progress-container">
+              <div class="progress-bar hp"></div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Ataque:</span>
+            <div class="progress-container">
+              <div class="progress-bar attack"></div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Defensa:</span>
+            <div class="progress-container">
+              <div class="progress-bar defense"></div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Atq. Esp:</span>
+            <div class="progress-container">
+              <div class="progress-bar sp-atk"></div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Def. Esp:</span>
+            <div class="progress-container">
+              <div class="progress-bar sp-def"></div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Velocidad:</span>
+            <div class="progress-container">
+              <div class="progress-bar speed"></div>
+            </div>
+          </div>
+        </div>
+        <div class="total-info">
+          <span class="total-label">Total: </span>
+          <span class="total-value"></span>
+          <span class="separator">•</span>
+          <span class="gen-label">Gen: </span>
+          <span class="gen-value"></span>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script src="./scripts/pokedex.js"></script>
+</body>
+
+</html>
