@@ -1,4 +1,4 @@
-# Código para Manejar Pokémon con Fetch y JSON
+# Código para Manejar terjetas con Fetch y JSON para examen
 
 Te separo el código en partes bien explicadas y comentadas:
 
