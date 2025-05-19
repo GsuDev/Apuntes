@@ -113,6 +113,7 @@ EXEC aumentar_precio(15);  -- Aumenta un 15%
 ---
 
 ## 📊 5. Funciones
+
 **Crear una función**:
 ```sql
 CREATE OR REPLACE FUNCTION calcular_iva (
@@ -147,7 +148,6 @@ BEGIN
         i := i + 1;
     END LOOP;
 END;
-/
 ```
 
 **FOR**:
@@ -160,7 +160,7 @@ BEGIN
         END LOOP;
     END LOOP;
 END;
-/
+
 ```
 
 ### ❓ Condicionales
@@ -175,7 +175,7 @@ BEGIN
         DBMS_OUTPUT.PUT_LINE('Suspendido 😢');
     END IF;
 END;
-/
+
 ```
 
 ---
@@ -201,7 +201,7 @@ EXCEPTION
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Error inesperado: ' || SQLERRM);
 END;
-/
+
 ```
 
 ### 🛑 Excepciones personalizadas
@@ -218,7 +218,7 @@ EXCEPTION
     WHEN e_saldo_insuficiente THEN
         DBMS_OUTPUT.PUT_LINE('Saldo insuficiente 💸');
 END;
-/
+
 ```
 
 
@@ -337,7 +337,8 @@ INSERT INTO PIEZAS VALUES(10,'LLAVE',60,'FERRETERIA', SYSDATE);
 Un trigger que registra en la taba audit_precio los cambios de precio:
 ```sql
 CREATE OR REPLACE TRIGGER TR_CONTROL
-AFTER INSERT OR DELETE OR UPDATE OF PRECIO ON PIEZAS
+AFTER INSERT OR DELETE OR UPDATE OF PRECIO 
+ON PIEZAS
 FOR EACH ROW
 WHEN (NEW.PRECIO > 10) -- Antes del BEGIN NEW ú OLD se usa sin ":" al principio
 BEGIN -- Dentro del BEGIN se debe poner ":" antes de NEW y de OLD
